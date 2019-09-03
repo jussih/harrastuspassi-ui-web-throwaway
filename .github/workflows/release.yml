@@ -1,0 +1,18 @@
+on: release
+name: Build release package
+jobs:
+  upload:
+    name: Upload Artifacts
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Upload
+      uses: skx/github-action-publish-binaries@release-0.6
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REACT_APP_API_URL: https://app.harrastuspassi.fi/api/pre1
+        REACT_APP_TOKEN_URL: https://app.harrastuspassi.fi/auth/token/
+        REACT_APP_LOGIN_URL: https://app.harrastuspassi.fi/accounts/login/
+      with:
+        args: 'webroot.tar.gz'
+
